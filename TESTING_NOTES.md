@@ -103,3 +103,32 @@ All 12 saved requests returned the expected status codes and JSON responses:
 Valid applications returned the expected approval or rejection decision. Invalid applications returned validation errors without producing a loan decision.
 
 The Postman Collection Runner completed with no request errors. The collection currently contains no automated Postman test scripts. Automated Python tests will be added using Pytest in Iteration 7.
+
+## Iteration 7 — Automated Pytest Testing
+
+Automated API tests were added using Pytest and FastAPI TestClient.
+
+Test file created:
+
+`tests/test_api.py`
+
+The automated tests cover:
+
+- Home route check
+- Good applicant approval
+- Missed payments rejection
+- Low credit score rejection
+- High debt rejection
+- High expenses rejection
+- Loan amount too high rejection
+- Multiple risk factors high-risk rejection
+- Missing input validation error
+- Invalid credit score validation error
+- Underage applicant validation error
+- Zero income validation error
+- Negative expenses validation error
+
+Command used to run tests:
+
+```bash
+python -m pytest

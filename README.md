@@ -199,6 +199,35 @@ Postman test cases include:
 
 All 12 planned Postman requests returned the expected status codes and JSON responses.
 
+## Automated Testing with Pytest
+
+In Iteration 7, automated API tests were added using Pytest and FastAPI TestClient.
+
+The tests are stored in:
+
+`tests/test_api.py`
+
+Current automated tests cover:
+
+- Home route check
+- Good applicant approval
+- Missed payments rejection
+- Low credit score rejection
+- High debt rejection
+- High expenses rejection
+- Loan amount too high rejection
+- Multiple risk factors high-risk rejection
+- Missing input validation error
+- Invalid credit score validation error
+- Underage applicant validation error
+- Zero income validation error
+- Negative expenses validation error
+
+To run all automated tests:
+
+```bash
+python -m pytest
+
 ## Current Status
 
 SmartLoan Version 1.0, developed through Iterations 1–6, is working locally through FastAPI and has been tested using Swagger and Postman.
