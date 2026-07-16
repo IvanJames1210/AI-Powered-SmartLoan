@@ -12,6 +12,9 @@ from fastapi.responses import JSONResponse
 # Import the main loan evaluation function from loan_logic.py
 from loan_logic import evaluate_loan_application
 
+#import database function to save evaluated loan applications
+from database import save_loan_application, get_all_loan_applications
+
 # Import Pydantic models from models.py
 # These models define request data, successful response data, and validation error data
 from models import (
@@ -60,16 +63,28 @@ async def validation_exception_handler(
 def home():
     return {"message": "SmartLoan API is running"}
 
+
 # Main loan evaluation endpoint
 # It accepts customer loan application data and returns a loan decision response
 @app.post("/loan/evaluate", response_model=LoanDecisionResponse)
 def evaluate_loan(applicant: LoanApplicationRequest):
-     # Convert the Pydantic request model into a normal Python dictionary
+    # Convert the Pydantic request model into a normal Python dictionary
     applicant_data = applicant.model_dump()
 
-     # Send the applicant data to the loan logic function
+    # Send the applicant data to the loan logic function
     result = evaluate_loan_application(applicant_data)
 
-     # Return the final result to the API user
+    # Save the applicant data and decision result in the database
+    application_id = save_loan_application(applicant_data, result)
+
+    # Add the saved database ID to the API response
+    result["application_id"] = application_id
+
+    # Return the final result to the API user
     return result
 
+@app.get("/loan/applications")
+def view_loan_applications():
+    return get_all_loan_applications()
+
+    

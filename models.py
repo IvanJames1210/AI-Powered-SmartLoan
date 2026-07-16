@@ -44,6 +44,9 @@ class LoanApplicationRequest(BaseModel):
 # This model defines the normal API response
 # It is used when the loan application is successfully evaluated
 class LoanDecisionResponse(BaseModel):
+    # Unique ID for the saved loan application in the database 
+    application_id: int
+
     # Final loan decision: Approved or Rejected
     decision: str
 

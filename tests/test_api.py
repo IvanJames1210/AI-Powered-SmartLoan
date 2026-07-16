@@ -30,6 +30,9 @@ def test_good_applicant_is_approved():
     response = client.post("/loan/evaluate", json=applicant)
 
     assert response.status_code == 200
+    assert "application_id" in response.json()
+    assert isinstance(response.json()["application_id"], int)
+    assert response.json()["application_id"] > 0
     assert response.json()["decision"] == "Approved"
     assert response.json()["decision_category"] == "approval"
     assert response.json()["risk_level"] == "Low"
@@ -319,3 +322,10 @@ def test_negative_expenses_returns_validation_error():
     assert response.json()["is_valid"] is False
     assert response.json()["decision_category"] == "validation_error"
     assert response.json()["input_source"] == "customer_api_json"
+
+# Test 14: Check that saved loan applications can be viewed from the database
+def test_get_saved_loan_applications():
+    response = client.get("/loan/applications")
+
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
