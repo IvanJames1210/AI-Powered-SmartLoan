@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS loan_applications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    age INTEGER NOT NULL,
+    monthly_income REAL NOT NULL,
+    monthly_expenses REAL NOT NULL,
+    existing_loan_amount REAL NOT NULL,
+    existing_monthly_debt_payment REAL NOT NULL,
+    employment_status TEXT NOT NULL,
+    employment_duration INTEGER NOT NULL,
+    credit_score INTEGER NOT NULL,
+    bank_balance REAL NOT NULL,
+    missed_payments INTEGER NOT NULL,
+    requested_loan_amount REAL NOT NULL,
+    requested_loan_duration INTEGER NOT NULL,
+    decision TEXT NOT NULL,
+    decision_category TEXT NOT NULL,
+    risk_level TEXT NOT NULL,
+    risk_score INTEGER NOT NULL,
+    reasons TEXT NOT NULL,
+    input_source TEXT NOT NULL,
+    created_at TEXT NOT NULL
+);

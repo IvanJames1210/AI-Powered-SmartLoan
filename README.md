@@ -355,3 +355,60 @@ Completed so far:
 - Add future evidence-verification logic in a later iteration
 - Improve database testing with a separate test database
 - Continue improving API documentation
+
+## Database Design and Future PostgreSQL Plan
+
+SmartLoan currently uses SQLite for local development.
+
+Current database file:
+
+```text
+smartloan.db
+```
+
+Current table:
+
+```text
+loan_applications
+```
+
+For the current prototype, one combined table is used. This table stores both applicant data and decision data together.
+
+A basic migration file has also been added:
+
+```text
+migrations/001_create_loan_applications.sql
+```
+
+This file documents how the loan_applications table is created.
+
+### Future PostgreSQL Support
+
+In a future production version, SmartLoan can move from SQLite to PostgreSQL.
+
+Future PostgreSQL improvements may include:
+
+- using PostgreSQL instead of SQLite
+- storing database connection settings in environment variables
+- using database migration tools such as Alembic
+- creating separate tables for loan applications and loan decisions
+
+### Future Separate Table Design
+
+The current prototype uses one table:
+
+```text
+loan_applications
+```
+
+A future version can separate this into two tables:
+
+```text
+loan_applications
+loan_decisions
+```
+
+Simple future design:
+
+- loan_applications stores applicant input details
+- loan_decisions stores decision result, risk score, reasons, and timestamp
