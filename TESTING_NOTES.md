@@ -236,3 +236,99 @@ Database integration is working correctly with:
 - Pytest
 
 SmartLoan Version 1.0 is working locally through FastAPI with automated testing and local database storage.
+
+## Iteration 9 — CSV Processing and Data Quality Testing
+
+In Iteration 9, SmartLoan was tested after adding CSV batch-processing support.
+
+The goal was to confirm that SmartLoan can:
+
+- read customer applications from a CSV file
+- validate each CSV row
+- detect missing values
+- detect unrealistic values
+- detect duplicate applications
+- process valid rows through the existing loan decision logic
+- return clear batch-processing results
+
+### CSV File Tested
+
+```text
+data/sample_applications.csv
+```
+
+The CSV file included:
+
+- valid applicant rows
+- a row with missing monthly income
+- a row with unrealistic age
+- a duplicate application row
+
+### Endpoint Tested
+
+```http
+POST /loan/evaluate-csv
+```
+
+### Swagger Testing
+
+Swagger was used to upload and test the CSV file.
+
+Result:
+
+- Status code: 200
+- File uploaded successfully
+- Total rows: 5
+- Valid rows were processed
+- Missing monthly income was detected
+- Unrealistic age was detected
+- Duplicate application was detected
+
+### Postman Testing
+
+Postman was used to test the CSV upload endpoint using:
+
+```text
+Body → form-data → file
+```
+
+Result:
+
+- Status code: 200
+- CSV file uploaded successfully
+- Batch-processing results returned correctly
+
+### Pytest Testing
+
+A new test file was added:
+
+```text
+tests/test_csv_processing.py
+```
+
+The CSV tests cover:
+
+- reading the CSV file
+- returning all CSV rows
+- processing valid CSV rows
+- detecting missing monthly income
+- detecting unrealistic age
+- detecting duplicate applications
+
+Command used:
+
+```bash
+python -m pytest
+```
+
+Latest result:
+
+```text
+20 passed
+```
+
+### Iteration 9 Testing Result
+
+All Iteration 9 CSV processing and data-quality tests passed successfully.
+
+SmartLoan can now process bulk loan applications from a CSV file and return clear row-by-row results.

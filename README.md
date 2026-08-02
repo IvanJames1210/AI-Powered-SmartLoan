@@ -412,3 +412,77 @@ Simple future design:
 
 - loan_applications stores applicant input details
 - loan_decisions stores decision result, risk score, reasons, and timestamp
+
+## Iteration 9: CSV Processing and Data Quality
+
+In Iteration 9, SmartLoan was updated to process multiple loan applications from a CSV file.
+
+Before this iteration, SmartLoan mainly evaluated one applicant at a time using JSON.
+
+Now SmartLoan can read a CSV file, validate each row, process valid applications, and return row-by-row batch results.
+
+### CSV Sample File
+
+A sample CSV file was added:
+
+```text
+data/sample_applications.csv
+
+
+The sample file includes:
+
+- valid applicant records
+- a missing-value record
+- an unrealistic-value record
+- a duplicate application record
+
+### CSV Processing Logic
+
+A new file was added:
+
+```text
+csv_processor.py
+```
+
+This file handles:
+
+- reading customer applications from CSV
+- validating required fields
+- detecting missing values
+- converting CSV text values into Python numbers
+- detecting unrealistic values
+- detecting duplicate applications
+- processing valid rows through the SmartLoan decision logic
+- returning batch-processing results
+
+### New CSV Evaluation Endpoint
+
+```http
+POST /loan/evaluate-csv
+```
+
+This endpoint accepts a CSV file upload and returns results for each row.
+
+Example result types:
+
+- processed
+- validation_error
+
+### CSV Testing
+
+Iteration 9 was tested using:
+
+- Terminal
+- Swagger
+- Postman
+- Pytest
+
+Latest Pytest result:
+
+```text
+20 passed
+```
+
+### Iteration 9 Result
+
+SmartLoan can now process bulk loan applications from a CSV file, validate each row, detect data-quality issues, detect duplicate applications, and return clear batch-processing results.

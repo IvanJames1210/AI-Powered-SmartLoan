@@ -1,0 +1,6 @@
+age,monthly_income,monthly_expenses,existing_loan_amount,existing_monthly_debt_payment,employment_status,employment_duration,credit_score,bank_balance,missed_payments,requested_loan_amount,requested_loan_duration
+28,12000,4000,5000,1000,employed,24,720,8000,0,20000,12
+35,9000,3000,4000,800,employed,36,650,6000,0,15000,12
+30,,3500,3000,700,employed,18,680,5000,0,12000,12
+150,10000,4000,5000,1000,employed,24,700,7000,0,15000,12
+28,12000,4000,5000,1000,employed,24,720,8000,0,20000,12

@@ -23,6 +23,13 @@ from models import (
     LoanValidationErrorResponse
 )
 
+import os
+import tempfile
+
+from fastapi import UploadFile, File
+from csv_processor import process_csv_applications 
+
+
 # Create the FastAPI application
 app = FastAPI()
 
@@ -86,5 +93,31 @@ def evaluate_loan(applicant: LoanApplicationRequest):
 @app.get("/loan/applications")
 def view_loan_applications():
     return get_all_loan_applications()
+
+
+# Route to upload and process loan applications from a CSV file
+@app.post("/loan/evaluate-csv")
+async def evaluate_csv_applications(file: UploadFile = File(...)):
+    if not file.filename.endswith(".csv"):
+        return {
+            "status": "error",
+            "message": "Only CSV files are supported"
+        }
+
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as temp_file:
+        content = await file.read()
+        temp_file.write(content)
+        temp_file_path = temp_file.name
+
+    try:
+        results = process_csv_applications(temp_file_path)
+    finally:
+        os.remove(temp_file_path)
+
+    return {
+        "filename": file.filename,
+        "total_rows": len(results),
+        "results": results
+    }
 
     
