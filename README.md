@@ -486,3 +486,48 @@ Latest Pytest result:
 ### Iteration 9 Result
 
 SmartLoan can now process bulk loan applications from a CSV file, validate each row, detect data-quality issues, detect duplicate applications, and return clear batch-processing results.
+
+
+## Iteration 10: Synthetic and Mock Data
+
+In Iteration 10, SmartLoan was updated to generate fake loan applicant data for safe testing.
+
+Before this iteration, SmartLoan used a small sample CSV file.
+
+Now SmartLoan can generate a larger synthetic dataset without using real customer information.
+
+### Synthetic Data Generator
+
+A new file was added:
+
+```text
+synthetic_data_generator.py
+
+This file creates fake loan applicants with different risk types:
+
+-low-risk applicants
+-medium-risk applicants
+-high-risk applicants
+
+Synthetic CSV File
+
+The generator creates:
+
+data/synthetic_applications.csv
+
+This file contains 100 fake loan applications.
+
+Iteration 10 Testing
+
+Iteration 10 was tested using:
+
+-Terminal
+-CSV processor
+-Pytest
+
+Latest Pytest result:
+
+24 passed
+Iteration 10 Result
+
+SmartLoan can now generate safe synthetic loan applicant data for testing, CSV processing, and future machine-learning preparation.

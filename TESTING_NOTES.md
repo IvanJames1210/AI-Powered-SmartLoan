@@ -332,3 +332,41 @@ Latest result:
 All Iteration 9 CSV processing and data-quality tests passed successfully.
 
 SmartLoan can now process bulk loan applications from a CSV file and return clear row-by-row results.
+
+Now update TESTING_NOTES.md.
+
+Go to the bottom and paste this:
+
+## Iteration 10 — Synthetic and Mock Data Testing
+
+In Iteration 10, SmartLoan was tested after adding synthetic data generation.
+
+The goal was to confirm that SmartLoan can:
+
+- create fake loan applicant records
+- generate low-risk, medium-risk, and high-risk applicant types
+- save synthetic applications into a CSV file
+- process the synthetic CSV file using the existing CSV processor
+- support safe testing without real customer data
+
+### Files Tested
+
+```text
+synthetic_data_generator.py
+data/synthetic_applications.csv
+tests/test_synthetic_data_generator.py
+
+Tests Completed
+
+- Checked that synthetic applications are created
+- Checked that each synthetic applicant has the required fields
+- Checked that the synthetic CSV file is created
+- Checked that the synthetic CSV file can be processed
+
+Latest Pytest Result
+24 passed
+
+Iteration 10 Testing Result
+
+All Iteration 10 synthetic data tests passed successfully.
+SmartLoan can now generate safe fake applicant data for testing, CSV processing, and future machine-learning preparation.
